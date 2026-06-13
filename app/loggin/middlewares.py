@@ -1,7 +1,7 @@
 from fastapi import Request
 import time
 
-from .models import UserLog
+from .models import Log
 
 
 async def log_middleware(request: Request, call_next):
@@ -16,7 +16,7 @@ async def log_middleware(request: Request, call_next):
         if k.lower() not in ["authorization", "cookie"]
     }
 
-    log = UserLog(
+    log = Log(
         user_id=user.id if user else None,
         method=request.method,
         path=request.url.path,
